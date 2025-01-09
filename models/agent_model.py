@@ -6,8 +6,9 @@ class Agent:
         self.brain = np.random.rand(brain_size)  # Randomly initialized "brain"
 
     def decide(self, inputs):
-        """Decides an action based on inputs."""
-        return np.dot(self.brain, inputs)
+    """Decides an action based on inputs."""
+    # Scale the output to keep values manageable
+    return [min(max(b * i, -1), 1) for b, i in zip(self.brain, inputs)]
 
     def mutate(self, mutation_rate=0.1):
         """Mutates the agent's brain to enable evolution."""
